@@ -1,4 +1,8 @@
-use actix_web::{web::Form, HttpResponse};
+use actix_web::{
+    web::{self, Form},
+    HttpResponse,
+};
+use sqlx::PgPool;
 
 #[derive(serde::Deserialize)]
 pub struct FormData {
@@ -7,6 +11,5 @@ pub struct FormData {
 }
 
 // Let's start simple: we always return a 200 OK
-pub async fn subscribe(_form: Form<FormData>) -> HttpResponse {
-    HttpResponse::Ok().finish()
+pub async fn subscribe(form: Form<FormData>, connection: web::Data<PgPool>) -> HttpResponse {
 }
